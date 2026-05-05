@@ -1,0 +1,641 @@
+// ---- SHELL ----
+
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr 284px;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+// ---- LEFT SIDEBAR ----
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px 0 0;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+
+  .material-symbols-rounded { font-size: 20px; }
+
+  &:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: var(--accent-subtle);
+    color: var(--accent-light);
+  }
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 20px;
+}
+
+.topic-section {
+  padding: 0 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+
+.topic-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+
+  &:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: var(--accent-subtle);
+    color: var(--accent-light);
+  }
+}
+
+.topic-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &.phd-life  { background: var(--color-phd-life); }
+  &.physics   { background: var(--color-physics); }
+  &.cs        { background: var(--color-cs); }
+  &.math      { background: var(--color-math); }
+  &.chemistry { background: var(--color-chemistry); }
+  &.economics { background: var(--color-economics); }
+  &.biology   { background: var(--color-bio); }
+}
+
+.topic-label { flex: 1; }
+
+.topic-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.browse-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 12px 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: none;
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+
+  .material-symbols-rounded { font-size: 18px; }
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+}
+
+.sidebar-user {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.user-info { flex: 1; min-width: 0; }
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-stage {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+  }
+
+  .material-symbols-rounded { font-size: 20px; }
+}
+
+// ---- MAIN FEED ----
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.feed-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: border-color 0.15s;
+
+  .material-symbols-rounded {
+    font-size: 20px;
+    color: var(--text-muted);
+  }
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    flex: 1;
+
+    &::placeholder { color: var(--text-muted); }
+  }
+
+  &:focus-within { border-color: var(--border-focus); }
+}
+
+.ask-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  .material-symbols-rounded { font-size: 18px; }
+
+  &:hover { background: var(--accent-hover); }
+}
+
+.feed-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 14px 24px 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover { color: var(--text-primary); }
+
+  &.active {
+    color: var(--accent-light);
+    border-bottom-color: var(--accent);
+  }
+}
+
+.questions-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 2px;
+  }
+}
+
+.question-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+
+  &:hover {
+    border-color: var(--border-strong);
+    background: var(--bg-elevated);
+    transform: translateY(-1px);
+  }
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.topic-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+
+  &.physics   { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+  &.cs        { background: rgba(245, 158, 11, 0.15);  color: #fbbf24; }
+  &.math      { background: rgba(16, 185, 129, 0.15);  color: #34d399; }
+  &.chemistry { background: rgba(239, 68, 68, 0.15);   color: #f87171; }
+  &.economics { background: rgba(236, 72, 153, 0.15);  color: #f472b6; }
+  &.biology   { background: rgba(132, 204, 22, 0.15);  color: #a3e635; }
+  &.phd-life  { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+}
+
+.top-answer-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #34d399;
+
+  .material-symbols-rounded { font-size: 14px; }
+}
+
+.question-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.question-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-base);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: color 0.15s;
+  cursor: pointer;
+
+  &:hover { color: var(--accent-light); }
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar,
+.anon-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.author-avatar {
+  &.physics   { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  &.cs        { background: rgba(245, 158, 11, 0.2);  color: #fbbf24; }
+  &.math      { background: rgba(16, 185, 129, 0.2);  color: #34d399; }
+  &.chemistry { background: rgba(239, 68, 68, 0.2);   color: #f87171; }
+  &.economics { background: rgba(236, 72, 153, 0.2);  color: #f472b6; }
+  &.phd-life  { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
+}
+
+.anon-avatar {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.author-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.author-stage {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.time-ago {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.card-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+
+  .material-symbols-rounded { font-size: 16px; }
+}
+
+// ---- RIGHT SIDEBAR ----
+
+.sidebar-right {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 16px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.widget {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+
+  .material-symbols-rounded { font-size: 16px; color: var(--accent-light); }
+}
+
+.contributors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contributor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contributor-rank {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.contributor-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &.physics   { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  &.cs        { background: rgba(245, 158, 11, 0.2);  color: #fbbf24; }
+  &.math      { background: rgba(16, 185, 129, 0.2);  color: #34d399; }
+  &.chemistry { background: rgba(239, 68, 68, 0.2);   color: #f87171; }
+  &.economics { background: rgba(236, 72, 153, 0.2);  color: #f472b6; }
+}
+
+.contributor-info { flex: 1; min-width: 0; }
+
+.contributor-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contributor-field {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.contributor-answers {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-light);
+  flex-shrink: 0;
+}
+
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.trending-item {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+
+  &:hover .trending-title { color: var(--accent-light); }
+}
+
+.trending-rank {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--border-strong);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.trending-content { flex: 1; }
+
+.trending-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 3px;
+  transition: color 0.15s;
+}
+
+.trending-answers {
+  font-size: 11px;
+  color: var(--text-muted);
+}
