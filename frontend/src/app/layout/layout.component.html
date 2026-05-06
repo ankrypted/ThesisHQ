@@ -1,0 +1,124 @@
+<div class="app-shell">
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar-left">
+    <div class="logo">
+      <div class="logo-icon">T</div>
+      <span class="logo-text">ThesisHQ</span>
+    </div>
+
+    <nav class="main-nav">
+      <a class="nav-item active">
+        <span class="material-symbols-rounded">home</span>
+        Home
+      </a>
+      <a class="nav-item">
+        <span class="material-symbols-rounded">bookmark</span>
+        Saved
+      </a>
+      <a class="nav-item">
+        <span class="material-symbols-rounded">help_center</span>
+        My Questions
+      </a>
+      <a class="nav-item">
+        <span class="material-symbols-rounded">rate_review</span>
+        My Answers
+      </a>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="topic-section">
+      <div class="section-label">PhD Life</div>
+      @for (topic of phdLifeTopics; track topic.id) {
+        <button
+          class="topic-item"
+          [class.active]="activeTopic() === topic.id"
+          (click)="setTopic(topic.id)">
+          <span class="topic-dot phd-life"></span>
+          <span class="topic-label">{{ topic.label }}</span>
+          <span class="topic-count">{{ topic.count }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="topic-section">
+      <div class="section-label">Domain Topics</div>
+      @for (topic of domainTopics; track topic.id) {
+        <button
+          class="topic-item"
+          [class.active]="activeTopic() === topic.id"
+          (click)="setTopic(topic.id)">
+          <span class="topic-dot" [ngClass]="topic.id"></span>
+          <span class="topic-label">{{ topic.label }}</span>
+          <span class="topic-count">{{ topic.count }}</span>
+        </button>
+      }
+    </div>
+
+    <button class="browse-all-btn">
+      <span class="material-symbols-rounded">grid_view</span>
+      Browse All Topics
+    </button>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">AK</div>
+      <div class="user-info">
+        <div class="user-name">Ankesh Prasad</div>
+        <div class="user-stage">Year 2 · CS</div>
+      </div>
+      <button class="settings-btn">
+        <span class="material-symbols-rounded">settings</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content (routed) -->
+  <div class="main-content">
+    <router-outlet />
+  </div>
+
+  <!-- Right Sidebar -->
+  <aside class="sidebar-right">
+    <div class="widget">
+      <h4 class="widget-title">
+        <span class="material-symbols-rounded">emoji_events</span>
+        Top Contributors
+      </h4>
+      <div class="contributors-list">
+        @for (c of contributors; track c.name; let i = $index) {
+          <div class="contributor">
+            <span class="contributor-rank">#{{ i + 1 }}</span>
+            <div class="contributor-avatar" [ngClass]="c.color">{{ c.initials }}</div>
+            <div class="contributor-info">
+              <div class="contributor-name">{{ c.name }}</div>
+              <div class="contributor-field">{{ c.field }}</div>
+            </div>
+            <span class="contributor-answers">{{ c.answers }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="widget">
+      <h4 class="widget-title">
+        <span class="material-symbols-rounded">trending_up</span>
+        Trending This Week
+      </h4>
+      <div class="trending-list">
+        @for (t of trending; track t.title; let i = $index) {
+          <div class="trending-item">
+            <span class="trending-rank">{{ i + 1 }}</span>
+            <div class="trending-content">
+              <p class="trending-title">{{ t.title }}</p>
+              <span class="trending-answers">{{ t.answers }} answers</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </aside>
+
+</div>
