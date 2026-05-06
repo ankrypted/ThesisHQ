@@ -1,0 +1,357 @@
+:host { display: block; height: 100%; }
+
+.detail-view {
+  height: 100%;
+  overflow-y: auto;
+  padding: 24px 32px 48px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+}
+
+// ---- BACK BUTTON ----
+
+.detail-header { margin-bottom: 24px; }
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+
+  .material-symbols-rounded { font-size: 18px; }
+  &:hover { background: var(--bg-surface); color: var(--text-secondary); }
+}
+
+// ---- QUESTION BLOCK ----
+
+.question-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  margin-bottom: 8px;
+}
+
+.question-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.topic-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+
+  &.physics   { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+  &.cs        { background: rgba(245, 158, 11, 0.15);  color: #fbbf24; }
+  &.math      { background: rgba(16, 185, 129, 0.15);  color: #34d399; }
+  &.chemistry { background: rgba(239, 68, 68, 0.15);   color: #f87171; }
+  &.economics { background: rgba(236, 72, 153, 0.15);  color: #f472b6; }
+  &.biology   { background: rgba(132, 204, 22, 0.15);  color: #a3e635; }
+  &.phd-life  { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+}
+
+.answered-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #34d399;
+
+  .material-symbols-rounded { font-size: 14px; }
+}
+
+.meta-time { font-size: 12px; color: var(--text-muted); margin-left: auto; }
+
+.question-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
+}
+
+.question-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-base);
+  padding: 3px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover { color: var(--accent-light); }
+}
+
+.question-body {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  white-space: pre-line;
+  margin-bottom: 24px;
+}
+
+.question-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+// ---- SHARED AUTHOR + AVATAR ----
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &.physics   { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  &.cs        { background: rgba(245, 158, 11, 0.2);  color: #fbbf24; }
+  &.math      { background: rgba(16, 185, 129, 0.2);  color: #34d399; }
+  &.chemistry { background: rgba(239, 68, 68, 0.2);   color: #f87171; }
+  &.economics { background: rgba(236, 72, 153, 0.2);  color: #f472b6; }
+  &.phd-life  { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
+  &.anon      { background: var(--bg-elevated); color: var(--text-muted); font-size: 16px; }
+}
+
+.author-meta { display: flex; flex-direction: column; }
+.author-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.author-stage { font-size: 11px; color: var(--text-muted); }
+
+// ---- UPVOTE BUTTON ----
+
+.upvote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+  .material-symbols-rounded { font-size: 18px; }
+
+  &:hover {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  &.small {
+    padding: 5px 12px;
+    font-size: 13px;
+
+    .material-symbols-rounded { font-size: 16px; }
+  }
+}
+
+// ---- ANSWERS ----
+
+.answers-section { margin-top: 24px; }
+
+.answers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.answers-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sort-btns {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.sort-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover { color: var(--text-primary); }
+  &.active { background: var(--bg-elevated); color: var(--text-primary); }
+}
+
+.answer-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: var(--border-strong); }
+
+  &.is-top {
+    border-color: rgba(52, 211, 153, 0.3);
+    background: rgba(52, 211, 153, 0.03);
+  }
+}
+
+.top-answer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #34d399;
+  margin-bottom: 14px;
+
+  .material-symbols-rounded { font-size: 15px; }
+}
+
+.answer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.answer-body {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+// ---- WRITE ANSWER ----
+
+.write-answer {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+
+.write-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.answer-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &::placeholder { color: var(--text-muted); }
+  &:focus { border-color: var(--border-focus); }
+}
+
+.write-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.anon-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+
+  input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; }
+  &:hover { color: var(--text-secondary); }
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  .material-symbols-rounded { font-size: 17px; }
+  &:hover { background: var(--accent-hover); }
+}
+
+// ---- NOT FOUND ----
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--text-muted);
+
+  .material-symbols-rounded { font-size: 48px; }
+  p { font-size: 15px; }
+}

@@ -1,0 +1,125 @@
+@if (question) {
+<div class="detail-view">
+
+  <!-- Back -->
+  <div class="detail-header">
+    <a class="back-btn" routerLink="/">
+      <span class="material-symbols-rounded">arrow_back</span>
+      Back to Feed
+    </a>
+  </div>
+
+  <!-- Question -->
+  <div class="question-block">
+    <div class="question-meta-top">
+      <span class="topic-badge" [ngClass]="question.topicType">{{ question.topic }}</span>
+      @if (question.hasTopAnswer) {
+        <span class="answered-badge">
+          <span class="material-symbols-rounded">verified</span>
+          Answered
+        </span>
+      }
+      <span class="meta-time">{{ question.timeAgo }}</span>
+    </div>
+
+    <h1 class="question-title">{{ question.title }}</h1>
+
+    <div class="question-tags">
+      @for (tag of question.tags; track tag) {
+        <span class="tag">#{{ tag }}</span>
+      }
+    </div>
+
+    <p class="question-body">{{ question.body }}</p>
+
+    <div class="question-footer">
+      <div class="author-info">
+        @if (question.isAnonymous) {
+          <div class="avatar anon">?</div>
+        } @else {
+          <div class="avatar" [ngClass]="question.topicType">{{ question.authorInitials }}</div>
+        }
+        <div class="author-meta">
+          <span class="author-name">{{ question.author }}</span>
+          <span class="author-stage">{{ question.stage }}</span>
+        </div>
+      </div>
+
+      <button class="upvote-btn">
+        <span class="material-symbols-rounded">arrow_upward</span>
+        {{ question.upvotes }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Answers -->
+  <div class="answers-section">
+    <div class="answers-header">
+      <h3 class="answers-count">{{ answers.length }} Answers</h3>
+      <div class="sort-btns">
+        <button class="sort-btn" [class.active]="activeSort() === 'top'" (click)="setSort('top')">Top</button>
+        <button class="sort-btn" [class.active]="activeSort() === 'newest'" (click)="setSort('newest')">Newest</button>
+      </div>
+    </div>
+
+    @for (answer of sortedAnswers; track answer.id) {
+      <div class="answer-card" [class.is-top]="answer.isTopAnswer">
+        @if (answer.isTopAnswer) {
+          <div class="top-answer-label">
+            <span class="material-symbols-rounded">verified</span>
+            Top Answer
+          </div>
+        }
+
+        <div class="answer-header">
+          <div class="author-info">
+            @if (answer.isAnonymous) {
+              <div class="avatar anon">?</div>
+            } @else {
+              <div class="avatar" [ngClass]="answer.topicType">{{ answer.authorInitials }}</div>
+            }
+            <div class="author-meta">
+              <span class="author-name">{{ answer.author }}</span>
+              <span class="author-stage">{{ answer.stage }} · {{ answer.timeAgo }}</span>
+            </div>
+          </div>
+
+          <button class="upvote-btn small">
+            <span class="material-symbols-rounded">arrow_upward</span>
+            {{ answer.upvotes }}
+          </button>
+        </div>
+
+        <p class="answer-body">{{ answer.body }}</p>
+      </div>
+    }
+
+    <!-- Write Answer -->
+    <div class="write-answer">
+      <h4 class="write-title">Write an Answer</h4>
+      <textarea
+        class="answer-input"
+        placeholder="Share your knowledge or experience. Be specific and helpful."
+        rows="5">
+      </textarea>
+      <div class="write-footer">
+        <label class="anon-toggle">
+          <input type="checkbox" />
+          <span>Post anonymously</span>
+        </label>
+        <button class="submit-btn">
+          <span class="material-symbols-rounded">send</span>
+          Submit Answer
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+} @else {
+  <div class="not-found">
+    <span class="material-symbols-rounded">search_off</span>
+    <p>Question not found.</p>
+    <a routerLink="/" class="back-btn">Back to Feed</a>
+  </div>
+}
