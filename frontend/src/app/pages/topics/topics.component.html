@@ -1,0 +1,128 @@
+<div class="topics-view">
+
+  <div class="topics-header">
+    <div class="header-top">
+      <h1 class="page-title">Browse Topics</h1>
+      <span class="total-count">{{ allTopics.length }} topics</span>
+    </div>
+
+    <div class="header-controls">
+      <div class="search-bar">
+        <span class="material-symbols-rounded">search</span>
+        <input type="text" placeholder="Search topics..." [(ngModel)]="searchQuery" />
+        @if (searchQuery) {
+          <button class="clear-search" (click)="searchQuery = ''">
+            <span class="material-symbols-rounded">close</span>
+          </button>
+        }
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">All</button>
+        <button class="filter-tab" [class.active]="activeFilter() === 'domain'" (click)="setFilter('domain')">Domain</button>
+        <button class="filter-tab" [class.active]="activeFilter() === 'phd-life'" (click)="setFilter('phd-life')">PhD Life</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="topics-body">
+
+    @if (filtered.length === 0) {
+      <div class="empty-state">
+        <span class="material-symbols-rounded">search_off</span>
+        <p>No topics match "{{ searchQuery }}"</p>
+      </div>
+    }
+
+    <!-- Domain Topics -->
+    @if (domainTopics.length > 0) {
+      <section class="topic-section">
+        <h2 class="section-title">
+          <span class="section-dot domain"></span>
+          Domain Topics
+        </h2>
+        <div class="topic-grid">
+          @for (topic of domainTopics; track topic.slug) {
+            <div class="topic-card">
+              <div class="card-header">
+                <div class="topic-identity">
+                  <span class="color-dot" [ngClass]="topic.id"></span>
+                  <span class="topic-name">{{ topic.name }}</span>
+                </div>
+                <button
+                  class="follow-btn"
+                  [class.following]="isFollowing(topic.slug)"
+                  (click)="toggleFollow(topic.slug)">
+                  @if (isFollowing(topic.slug)) {
+                    <span class="material-symbols-rounded">check</span>
+                    Following
+                  } @else {
+                    <span class="material-symbols-rounded">add</span>
+                    Follow
+                  }
+                </button>
+              </div>
+              <p class="topic-description">{{ topic.description }}</p>
+              <div class="topic-stats">
+                <span class="stat">
+                  <span class="material-symbols-rounded">help_center</span>
+                  {{ formatCount(topic.questionCount) }} questions
+                </span>
+                <span class="stat">
+                  <span class="material-symbols-rounded">group</span>
+                  {{ formatCount(topic.followerCount) }} followers
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- PhD Life Topics -->
+    @if (phdLifeTopics.length > 0) {
+      <section class="topic-section">
+        <h2 class="section-title">
+          <span class="section-dot phd-life"></span>
+          PhD Life
+        </h2>
+        <div class="topic-grid">
+          @for (topic of phdLifeTopics; track topic.slug) {
+            <div class="topic-card">
+              <div class="card-header">
+                <div class="topic-identity">
+                  <span class="color-dot phd-life"></span>
+                  <span class="topic-name">{{ topic.name }}</span>
+                </div>
+                <button
+                  class="follow-btn"
+                  [class.following]="isFollowing(topic.slug)"
+                  (click)="toggleFollow(topic.slug)">
+                  @if (isFollowing(topic.slug)) {
+                    <span class="material-symbols-rounded">check</span>
+                    Following
+                  } @else {
+                    <span class="material-symbols-rounded">add</span>
+                    Follow
+                  }
+                </button>
+              </div>
+              <p class="topic-description">{{ topic.description }}</p>
+              <div class="topic-stats">
+                <span class="stat">
+                  <span class="material-symbols-rounded">help_center</span>
+                  {{ formatCount(topic.questionCount) }} questions
+                </span>
+                <span class="stat">
+                  <span class="material-symbols-rounded">group</span>
+                  {{ formatCount(topic.followerCount) }} followers
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+  </div>
+</div>

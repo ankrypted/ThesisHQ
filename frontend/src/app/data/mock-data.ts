@@ -1,3 +1,34 @@
+export interface TopicData {
+  id: string;
+  name: string;
+  slug: string;
+  type: 'domain' | 'phd-life';
+  description: string;
+  questionCount: number;
+  followerCount: number;
+}
+
+export const MOCK_TOPICS: TopicData[] = [
+  // Domain topics
+  { id: 'physics',   name: 'Physics',           slug: 'physics',           type: 'domain',   description: 'Quantum mechanics, condensed matter, astrophysics, and all branches of physics research.',          questionCount: 892,  followerCount: 1243 },
+  { id: 'cs',        name: 'Computer Science',   slug: 'computer-science',  type: 'domain',   description: 'Algorithms, machine learning, systems, theory, and software engineering research.',                 questionCount: 1243, followerCount: 2156 },
+  { id: 'math',      name: 'Mathematics',        slug: 'mathematics',       type: 'domain',   description: 'Pure and applied mathematics — analysis, algebra, topology, probability, and more.',                questionCount: 671,  followerCount: 934  },
+  { id: 'chemistry', name: 'Chemistry',          slug: 'chemistry',         type: 'domain',   description: 'Organic, inorganic, physical, and analytical chemistry across all research contexts.',              questionCount: 445,  followerCount: 612  },
+  { id: 'economics', name: 'Economics',          slug: 'economics',         type: 'domain',   description: 'Micro and macroeconomics, econometrics, behavioural economics, and policy research.',               questionCount: 334,  followerCount: 489  },
+  { id: 'biology',   name: 'Biology',            slug: 'biology',           type: 'domain',   description: 'Molecular biology, genetics, ecology, neuroscience, and all life sciences.',                       questionCount: 567,  followerCount: 798  },
+  { id: 'phd-life',  name: 'Psychology',         slug: 'psychology',        type: 'domain',   description: 'Cognitive, clinical, social, and developmental psychology research.',                               questionCount: 289,  followerCount: 412  },
+  { id: 'phd-life',  name: 'Linguistics',        slug: 'linguistics',       type: 'domain',   description: 'Phonology, syntax, semantics, sociolinguistics, and computational linguistics.',                   questionCount: 178,  followerCount: 267  },
+  // PhD Life topics
+  { id: 'phd-life',  name: 'Advisor & Committee',    slug: 'advisor-committee',     type: 'phd-life', description: 'Navigating advisor relationships, committee dynamics, and academic mentorship.',              questionCount: 234,  followerCount: 1891 },
+  { id: 'phd-life',  name: 'Funding & Grants',       slug: 'funding-grants',        type: 'phd-life', description: 'Fellowship applications, grant writing, stipend issues, and funding strategies.',            questionCount: 156,  followerCount: 1432 },
+  { id: 'phd-life',  name: 'Mental Health',          slug: 'mental-health',         type: 'phd-life', description: 'Burnout, imposter syndrome, anxiety, and wellbeing throughout the PhD journey.',             questionCount: 312,  followerCount: 2341 },
+  { id: 'phd-life',  name: 'Job Market',             slug: 'job-market',            type: 'phd-life', description: 'Academia vs industry decisions, applications, interviews, and career transitions.',          questionCount: 189,  followerCount: 1678 },
+  { id: 'phd-life',  name: 'Thesis Writing',         slug: 'thesis-writing',        type: 'phd-life', description: 'Dissertation structure, writing productivity, LaTeX, and getting to the finish line.',       questionCount: 278,  followerCount: 1923 },
+  { id: 'phd-life',  name: 'Qualifying Exams',       slug: 'qualifying-exams',      type: 'phd-life', description: 'Preparing for quals, comprehensive exams, and the candidacy process.',                      questionCount: 143,  followerCount: 1102 },
+  { id: 'phd-life',  name: 'Publication Process',    slug: 'publication-process',   type: 'phd-life', description: 'Submitting papers, navigating peer review, revisions, and choosing journals.',              questionCount: 198,  followerCount: 1567 },
+  { id: 'phd-life',  name: 'Conference & Networking', slug: 'conference-networking', type: 'phd-life', description: 'Presenting work, building connections, and navigating academic conferences.',               questionCount: 121,  followerCount: 987  },
+];
+
 export interface Question {
   id: number;
   title: string;

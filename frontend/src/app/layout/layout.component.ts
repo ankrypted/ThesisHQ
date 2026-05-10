@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, NgClass],
+  imports: [RouterOutlet, RouterLink, NgClass],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
