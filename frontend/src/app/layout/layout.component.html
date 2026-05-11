@@ -8,19 +8,19 @@
     </div>
 
     <nav class="main-nav">
-      <a class="nav-item active">
+      <a class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <span class="material-symbols-rounded">home</span>
         Home
       </a>
-      <a class="nav-item">
+      <a class="nav-item" routerLink="/saved" routerLinkActive="active">
         <span class="material-symbols-rounded">bookmark</span>
         Saved
       </a>
-      <a class="nav-item">
+      <a class="nav-item" routerLink="/my-questions" routerLinkActive="active">
         <span class="material-symbols-rounded">help_center</span>
         My Questions
       </a>
-      <a class="nav-item">
+      <a class="nav-item" routerLink="/my-answers" routerLinkActive="active">
         <span class="material-symbols-rounded">rate_review</span>
         My Answers
       </a>
