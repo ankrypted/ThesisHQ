@@ -1,0 +1,70 @@
+<div class="saved-view">
+
+  <div class="saved-header">
+    <h1 class="page-title">Saved</h1>
+    @if (questions.length > 0) {
+      <span class="count-badge">{{ questions.length }}</span>
+    }
+  </div>
+
+  @if (questions.length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded">bookmark</span>
+      <p class="empty-title">Nothing saved yet</p>
+      <p class="empty-sub">Hit the bookmark icon on any question to save it here.</p>
+      <a class="browse-link" routerLink="/">Browse questions</a>
+    </div>
+  } @else {
+    <div class="questions-list">
+      @for (q of questions; track q.id) {
+        <div class="question-card" [routerLink]="['/question', q.id]">
+          <div class="card-top">
+            <span class="topic-badge" [ngClass]="q.topicType">{{ q.topic }}</span>
+            @if (q.hasTopAnswer) {
+              <span class="top-answer-badge">
+                <span class="material-symbols-rounded">verified</span>
+                Top Answer
+              </span>
+            }
+          </div>
+
+          <h3 class="question-title">{{ q.title }}</h3>
+
+          <div class="question-tags">
+            @for (tag of q.tags; track tag) {
+              <span class="tag">#{{ tag }}</span>
+            }
+          </div>
+
+          <div class="card-bottom">
+            <div class="author-info">
+              @if (q.isAnonymous) {
+                <div class="anon-avatar">?</div>
+              } @else {
+                <div class="author-avatar" [ngClass]="q.topicType">{{ q.authorInitials }}</div>
+              }
+              <div class="author-meta">
+                <span class="author-name">{{ q.author }}</span>
+                <span class="author-stage">{{ q.stage }}</span>
+              </div>
+              <span class="time-ago">· {{ q.timeAgo }}</span>
+            </div>
+
+            <div class="card-stats">
+              <span class="stat">
+                <span class="material-symbols-rounded">forum</span>{{ q.answers }}
+              </span>
+              <span class="stat">
+                <span class="material-symbols-rounded">arrow_upward</span>{{ q.upvotes }}
+              </span>
+              <button class="save-btn saved" (click)="unsave(q.id, $event)" title="Remove from saved">
+                <span class="material-symbols-rounded">bookmark</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+</div>

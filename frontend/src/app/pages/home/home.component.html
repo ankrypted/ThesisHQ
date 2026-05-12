@@ -54,6 +54,13 @@
             <span class="stat">
               <span class="material-symbols-rounded">arrow_upward</span>{{ q.upvotes }}
             </span>
+            <button
+              class="save-btn"
+              [class.saved]="isSaved(q.id)"
+              (click)="toggleSave(q.id, $event)"
+              [title]="isSaved(q.id) ? 'Remove from saved' : 'Save question'">
+              <span class="material-symbols-rounded">bookmark</span>
+            </button>
           </div>
         </div>
       </div>

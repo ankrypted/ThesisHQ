@@ -45,10 +45,16 @@
         </div>
       </div>
 
-      <button class="upvote-btn">
-        <span class="material-symbols-rounded">arrow_upward</span>
-        {{ question.upvotes }}
-      </button>
+      <div class="question-actions">
+        <button class="upvote-btn">
+          <span class="material-symbols-rounded">arrow_upward</span>
+          {{ question.upvotes }}
+        </button>
+        <button class="save-btn" [class.saved]="isSaved" (click)="toggleSave()" [title]="isSaved ? 'Remove from saved' : 'Save question'">
+          <span class="material-symbols-rounded">bookmark</span>
+          {{ isSaved ? 'Saved' : 'Save' }}
+        </button>
+      </div>
     </div>
   </div>
 

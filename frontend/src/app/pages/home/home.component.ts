@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MOCK_QUESTIONS, Question } from '../../data/mock-data';
+import { SavedService } from '../../services/saved.service';
 
 interface TopicOption {
   id: string;
@@ -19,6 +20,15 @@ interface TopicOption {
 export class HomeComponent {
   activeTab = signal<'latest' | 'trending' | 'unanswered'>('latest');
   questions: Question[] = MOCK_QUESTIONS;
+
+  constructor(public saved: SavedService) {}
+
+  isSaved(id: number): boolean { return this.saved.savedIds().has(id); }
+
+  toggleSave(id: number, event: Event): void {
+    event.stopPropagation();
+    this.saved.toggle(id);
+  }
 
   // Modal state
   showModal = signal(false);
