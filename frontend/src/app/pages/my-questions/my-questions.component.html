@@ -1,0 +1,102 @@
+<div class="myq-view">
+
+  <div class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">My Questions</h1>
+      @if (questions.length > 0) {
+        <span class="count-badge">{{ questions.length }}</span>
+      }
+    </div>
+    <button class="ask-btn" routerLink="/">
+      <span class="material-symbols-rounded">add</span>
+      Ask a Question
+    </button>
+  </div>
+
+  @if (questions.length > 0) {
+    <div class="stats-bar">
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">help_center</span>
+        <span class="stat-value">{{ questions.length }}</span>
+        <span class="stat-label">questions asked</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">arrow_upward</span>
+        <span class="stat-value">{{ totalUpvotes }}</span>
+        <span class="stat-label">upvotes received</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">forum</span>
+        <span class="stat-value">{{ totalAnswers }}</span>
+        <span class="stat-label">answers received</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">verified</span>
+        <span class="stat-value">{{ answeredCount }}/{{ questions.length }}</span>
+        <span class="stat-label">answered</span>
+      </div>
+    </div>
+  }
+
+  @if (questions.length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded">help_center</span>
+      <p class="empty-title">No questions yet</p>
+      <p class="empty-sub">When you ask a question it will appear here.</p>
+      <a class="browse-link" routerLink="/">Ask your first question</a>
+    </div>
+  } @else {
+    <div class="questions-list">
+      @for (q of questions; track q.id) {
+        <div class="question-card" [routerLink]="['/question', q.id]">
+
+          <div class="card-top">
+            <span class="topic-badge" [ngClass]="q.topicType">{{ q.topic }}</span>
+            @if (q.hasTopAnswer) {
+              <span class="top-answer-badge">
+                <span class="material-symbols-rounded">verified</span>
+                Top Answer
+              </span>
+            }
+            @if (q.answers === 0) {
+              <span class="unanswered-badge">Unanswered</span>
+            }
+          </div>
+
+          <h3 class="question-title">{{ q.title }}</h3>
+
+          <div class="question-tags">
+            @for (tag of q.tags; track tag) {
+              <span class="tag">#{{ tag }}</span>
+            }
+          </div>
+
+          <div class="card-bottom">
+            <span class="time-ago">Asked {{ q.timeAgo }}</span>
+
+            <div class="card-stats">
+              <span class="stat">
+                <span class="material-symbols-rounded">forum</span>{{ q.answers }}
+              </span>
+              <span class="stat">
+                <span class="material-symbols-rounded">arrow_upward</span>{{ q.upvotes }}
+              </span>
+              <button
+                class="save-btn"
+                [class.saved]="isSaved(q.id)"
+                (click)="toggleSave(q.id, $event)"
+                [title]="isSaved(q.id) ? 'Remove from saved' : 'Save'">
+                <span class="material-symbols-rounded">bookmark</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      }
+    </div>
+  }
+
+</div>

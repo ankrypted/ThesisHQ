@@ -212,6 +212,43 @@ How should I handle and report weak instruments at this level?`,
     answers: 9,
     upvotes: 31,
     isAnonymous: false
+  },
+  {
+    id: 9,
+    title: 'How do you structure a literature review when there are 500+ papers in your area?',
+    body: `I'm in my second year doing a CS PhD focused on federated learning and privacy. My area has exploded in the last three years and there are now hundreds of relevant papers.
+
+My advisor wants a literature review chapter done in the next two months but I'm completely lost on how to structure it. Do I organise by theme, by chronology, by methodology? How do you decide what to include vs exclude?
+
+Any frameworks or strategies that have actually worked for people?`,
+    topic: 'Thesis Writing',
+    topicType: 'phd-life',
+    author: 'Ankesh Prasad',
+    authorInitials: 'AK',
+    stage: 'Year 2',
+    timeAgo: '3d ago',
+    tags: ['literature-review', 'thesis-writing', 'organisation'],
+    answers: 14,
+    upvotes: 52,
+    isAnonymous: false
+  },
+  {
+    id: 10,
+    title: 'Best practices for reproducible ML experiments in a PhD context?',
+    body: `I keep running into a problem where I can't reproduce my own results from three months ago. Different random seeds, slightly different preprocessing, environment differences — it's becoming a real issue as I try to write up my results.
+
+What tooling or workflow practices have people found actually useful for keeping ML experiments reproducible without spending all your time on infrastructure? I've looked at MLflow and Weights & Biases but wondering if there are lighter-weight options that work well for a solo PhD student.`,
+    topic: 'Computer Science',
+    topicType: 'cs',
+    author: 'Ankesh Prasad',
+    authorInitials: 'AK',
+    stage: 'Year 2',
+    timeAgo: '5d ago',
+    tags: ['machine-learning', 'reproducibility', 'experiment-tracking'],
+    answers: 21,
+    upvotes: 78,
+    isAnonymous: false,
+    hasTopAnswer: true
   }
 ];
 
