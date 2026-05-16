@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MOCK_QUESTIONS, Question } from '../../data/mock-data';
 import { SavedService } from '../../services/saved.service';
+import { QuestionModalService } from '../../services/question-modal.service';
 
 const CURRENT_USER = 'Ankesh Prasad';
 
@@ -16,7 +17,7 @@ const CURRENT_USER = 'Ankesh Prasad';
 export class MyQuestionsComponent {
   questions: Question[] = MOCK_QUESTIONS.filter(q => q.author === CURRENT_USER);
 
-  constructor(public saved: SavedService) {}
+  constructor(public saved: SavedService, public modal: QuestionModalService) {}
 
   isSaved(id: number): boolean { return this.saved.savedIds().has(id); }
 

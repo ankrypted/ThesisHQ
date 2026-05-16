@@ -4,7 +4,7 @@
       <span class="material-symbols-rounded">search</span>
       <input type="text" placeholder="Search questions, topics, or tags..." />
     </div>
-    <button class="ask-btn" (click)="openModal()">
+    <button class="ask-btn" (click)="modal.open()">
       <span class="material-symbols-rounded">add</span>
       Ask a Question
     </button>
@@ -67,100 +67,3 @@
     }
   </div>
 </div>
-
-<!-- Ask a Question Modal -->
-@if (showModal()) {
-  <div class="modal-backdrop" (click)="closeModal()">
-    <div class="modal" (click)="$event.stopPropagation()">
-
-      <div class="modal-header">
-        <span class="modal-label">Ask a Question</span>
-        <button class="close-btn" (click)="closeModal()">
-          <span class="material-symbols-rounded">close</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-
-        <!-- Title -->
-        <div class="form-section">
-          <textarea
-            class="title-input"
-            placeholder="What do you want to know?"
-            [(ngModel)]="questionTitle"
-            rows="2"
-            maxlength="200"
-            autofocus>
-          </textarea>
-          <span class="char-count">{{ questionTitle.length }} / 200</span>
-        </div>
-
-        <!-- Topic -->
-        <div class="form-section">
-          <label class="form-label">Topic <span class="required">*</span></label>
-          <div class="topic-chips">
-            @for (topic of allTopics; track topic.label) {
-              <button
-                class="topic-chip"
-                [ngClass]="topic.id"
-                [class.selected]="selectedTopic?.label === topic.label"
-                (click)="selectTopic(topic)">
-                {{ topic.label }}
-              </button>
-            }
-          </div>
-        </div>
-
-        <!-- Body -->
-        <div class="form-section">
-          <label class="form-label">More detail <span class="optional">optional</span></label>
-          <textarea
-            class="body-input"
-            placeholder="Add context, what you've already tried, or any relevant details..."
-            [(ngModel)]="questionBody"
-            rows="4">
-          </textarea>
-        </div>
-
-        <!-- Tags -->
-        <div class="form-section">
-          <label class="form-label">Tags <span class="optional">up to 5 · press Enter to add</span></label>
-          <div class="tag-input-area">
-            @for (tag of tags; track tag) {
-              <span class="tag-chip">
-                #{{ tag }}
-                <button (click)="removeTag(tag)" type="button">
-                  <span class="material-symbols-rounded">close</span>
-                </button>
-              </span>
-            }
-            @if (tags.length < 5) {
-              <input
-                type="text"
-                class="tag-text-input"
-                placeholder="{{ tags.length === 0 ? 'e.g. quantum-mechanics' : 'Add another...' }}"
-                [(ngModel)]="tagInput"
-                (keydown)="onTagKeydown($event)" />
-            }
-          </div>
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <label class="anon-toggle">
-          <input type="checkbox" [(ngModel)]="isAnonymous" />
-          <span>Post anonymously</span>
-        </label>
-        <div class="footer-actions">
-          <button class="cancel-btn" (click)="closeModal()">Cancel</button>
-          <button class="post-btn" [disabled]="!canSubmit">
-            <span class="material-symbols-rounded">send</span>
-            Post Question
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-}

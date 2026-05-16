@@ -1,11 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { QuestionModalService } from '../services/question-modal.service';
+
+interface TopicOption { id: string; label: string; }
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgClass, FormsModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
@@ -46,7 +50,70 @@ export class LayoutComponent {
     { title: 'How to politely push back on Reviewer #2?', answers: 45 },
   ];
 
+  // Modal form state
+  questionTitle = '';
+  questionBody = '';
+  selectedTopic: TopicOption | null = null;
+  tags: string[] = [];
+  tagInput = '';
+  isAnonymous = false;
+
+  allTopics: TopicOption[] = [
+    { id: 'physics',   label: 'Physics' },
+    { id: 'cs',        label: 'Computer Science' },
+    { id: 'math',      label: 'Mathematics' },
+    { id: 'chemistry', label: 'Chemistry' },
+    { id: 'economics', label: 'Economics' },
+    { id: 'biology',   label: 'Biology' },
+    { id: 'phd-life',  label: 'Advisor & Committee' },
+    { id: 'phd-life',  label: 'Funding & Grants' },
+    { id: 'phd-life',  label: 'Mental Health' },
+    { id: 'phd-life',  label: 'Thesis Writing' },
+    { id: 'phd-life',  label: 'Qualifying Exams' },
+    { id: 'phd-life',  label: 'Job Market' },
+  ];
+
+  constructor(public modal: QuestionModalService) {}
+
+  get canSubmit(): boolean {
+    return this.questionTitle.trim().length > 0 && this.selectedTopic !== null;
+  }
+
   setTopic(topicId: string) {
     this.activeTopic.set(topicId === this.activeTopic() ? 'all' : topicId);
   }
+
+  closeModal() {
+    this.modal.close();
+    this.questionTitle = '';
+    this.questionBody = '';
+    this.selectedTopic = null;
+    this.tags = [];
+    this.tagInput = '';
+    this.isAnonymous = false;
+  }
+
+  selectTopic(topic: TopicOption) {
+    this.selectedTopic = this.selectedTopic?.label === topic.label ? null : topic;
+  }
+
+  onTagKeydown(event: KeyboardEvent) {
+    if ((event.key === 'Enter' || event.key === ',') && this.tagInput.trim()) {
+      event.preventDefault();
+      const tag = this.tagInput.trim().toLowerCase().replace(/[\s,]+/g, '-');
+      if (tag && !this.tags.includes(tag) && this.tags.length < 5) {
+        this.tags.push(tag);
+      }
+      this.tagInput = '';
+    } else if (event.key === 'Backspace' && !this.tagInput && this.tags.length) {
+      this.tags.pop();
+    }
+  }
+
+  removeTag(tag: string) {
+    this.tags = this.tags.filter(t => t !== tag);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() { if (this.modal.isOpen()) this.closeModal(); }
 }

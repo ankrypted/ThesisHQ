@@ -7,7 +7,7 @@
         <span class="count-badge">{{ questions.length }}</span>
       }
     </div>
-    <button class="ask-btn" routerLink="/">
+    <button class="ask-btn" (click)="modal.open()">
       <span class="material-symbols-rounded">add</span>
       Ask a Question
     </button>
@@ -46,7 +46,7 @@
       <span class="material-symbols-rounded">help_center</span>
       <p class="empty-title">No questions yet</p>
       <p class="empty-sub">When you ask a question it will appear here.</p>
-      <a class="browse-link" routerLink="/">Ask your first question</a>
+      <button class="browse-link" (click)="modal.open()">Ask your first question</button>
     </div>
   } @else {
     <div class="questions-list">
