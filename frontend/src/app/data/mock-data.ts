@@ -481,5 +481,54 @@ Lee et al. (2022, AER) have updated guidance on this — the "tF" procedure they
     upvotes: 18,
     isAnonymous: false,
     isTopAnswer: true
+  },
+
+  // Ankesh Prasad's answers
+  {
+    id: 303,
+    questionId: 3,
+    author: 'Ankesh Prasad',
+    authorInitials: 'AK',
+    topicType: 'cs',
+    stage: 'Year 2',
+    timeAgo: '4h ago',
+    body: `Hit this exact bug last month. In my case it was the QK dot products overflowing in fp16 before the 1/√d_k scaling was applied. Fix: cast to fp32 before the matmul, then cast back after softmax.
+
+attn_weights = torch.softmax(
+  torch.matmul(q.float(), k.float().transpose(-2, -1)) / math.sqrt(d_k), dim=-1
+).to(q.dtype)
+
+Also double-check your padding mask — if it's not applied before softmax, you can get -inf in the input which propagates to NaN in the output. torch.autograd.detect_anomaly() will tell you the exact op.`,
+    upvotes: 17,
+    isAnonymous: false,
+    isTopAnswer: true
+  },
+  {
+    id: 403,
+    questionId: 4,
+    author: 'Ankesh Prasad',
+    authorInitials: 'AK',
+    topicType: 'phd-life',
+    stage: 'Year 2',
+    timeAgo: '5h ago',
+    body: `I'm earlier in my PhD than you, so I can't speak from the same experience, but I wanted to say: grant reviewers aren't evaluating your worth as a researcher — they're evaluating whether your proposal fits their current priorities, and those shift every cycle.
+
+Five in one week is genuinely a lot to carry. I hope you let yourself sit with that before jumping into revision mode. The senior students who've been through this seem to agree that the proposals that eventually land are usually the ones that got sharpened by early rejections.`,
+    upvotes: 24,
+    isAnonymous: false
+  },
+  {
+    id: 702,
+    questionId: 7,
+    author: 'Ankesh Prasad',
+    authorInitials: 'AK',
+    topicType: 'phd-life',
+    stage: 'Year 2',
+    timeAgo: '18h ago',
+    body: `I mapped the citation graph with Connected Papers before reading anything — it immediately showed which 30-40 papers were load-bearing (cited by everything else). Those got full reads. Everything else got tiered down.
+
+Also worth remembering: you don't need to understand every paper cold. If you can describe what problem it solved and where it sits relative to 3-4 others in the area, that's usually what committees are actually testing for.`,
+    upvotes: 11,
+    isAnonymous: false
   }
 ];

@@ -5,6 +5,7 @@ import { QuestionDetailComponent } from './pages/question-detail/question-detail
 import { TopicsComponent } from './pages/topics/topics.component';
 import { SavedComponent } from './pages/saved/saved.component';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
+import { MyAnswersComponent } from './pages/my-answers/my-answers.component';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,8 @@ export const routes: Routes = [
       { path: 'question/:id', component: QuestionDetailComponent },
       { path: 'topics', component: TopicsComponent },
       { path: 'saved', component: SavedComponent },
-      { path: 'my-questions', component: MyQuestionsComponent }
+      { path: 'my-questions', component: MyQuestionsComponent },
+      { path: 'my-answers', component: MyAnswersComponent }
     ]
   }
 ];

@@ -1,0 +1,75 @@
+<div class="mya-view">
+
+  <div class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">My Answers</h1>
+      @if (answers.length > 0) {
+        <span class="count-badge">{{ answers.length }}</span>
+      }
+    </div>
+  </div>
+
+  @if (answers.length > 0) {
+    <div class="stats-bar">
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">rate_review</span>
+        <span class="stat-value">{{ answers.length }}</span>
+        <span class="stat-label">answers given</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">arrow_upward</span>
+        <span class="stat-value">{{ totalUpvotes }}</span>
+        <span class="stat-label">upvotes received</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="material-symbols-rounded">verified</span>
+        <span class="stat-value">{{ topAnswerCount }}</span>
+        <span class="stat-label">top answers</span>
+      </div>
+    </div>
+  }
+
+  @if (answers.length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded">rate_review</span>
+      <p class="empty-title">No answers yet</p>
+      <p class="empty-sub">Questions you answer will appear here.</p>
+      <a class="browse-link" routerLink="/">Browse questions</a>
+    </div>
+  } @else {
+    <div class="answers-list">
+      @for (a of answers; track a.id) {
+        <div class="answer-card" [routerLink]="['/question', a.questionId]">
+
+          <div class="card-top">
+            <span class="topic-badge" [ngClass]="a.questionTopicType">{{ a.questionTopic }}</span>
+            @if (a.isTopAnswer) {
+              <span class="top-answer-badge">
+                <span class="material-symbols-rounded">verified</span>
+                Top Answer
+              </span>
+            }
+          </div>
+
+          <p class="question-ref">
+            <span class="material-symbols-rounded">forum</span>
+            {{ a.questionTitle }}
+          </p>
+
+          <p class="answer-preview">{{ truncate(a.body) }}</p>
+
+          <div class="card-bottom">
+            <span class="time-ago">Answered {{ a.timeAgo }}</span>
+            <span class="upvote-stat">
+              <span class="material-symbols-rounded">arrow_upward</span>{{ a.upvotes }}
+            </span>
+          </div>
+
+        </div>
+      }
+    </div>
+  }
+
+</div>
