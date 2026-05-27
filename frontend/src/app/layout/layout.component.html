@@ -42,6 +42,7 @@
       }
     </div>
 
+
     <div class="sidebar-divider"></div>
 
     <div class="topic-section">
@@ -109,13 +110,13 @@
       </h4>
       <div class="trending-list">
         @for (t of trending; track t.title; let i = $index) {
-          <div class="trending-item">
+          <a class="trending-item" [routerLink]="['/question', t.id]">
             <span class="trending-rank">{{ i + 1 }}</span>
             <div class="trending-content">
               <p class="trending-title">{{ t.title }}</p>
               <span class="trending-answers">{{ t.answers }} answers</span>
             </div>
-          </div>
+          </a>
         }
       </div>
     </div>

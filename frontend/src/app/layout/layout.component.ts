@@ -43,11 +43,11 @@ export class LayoutComponent {
   ];
 
   trending = [
-    { title: 'How do you survive your first year without a support system?', answers: 89 },
-    { title: 'Best LaTeX setup for a 300-page dissertation?', answers: 67 },
-    { title: 'Academia vs industry after PhD — honest takes?', answers: 134 },
-    { title: 'Is it normal to feel like you know nothing in Year 3?', answers: 201 },
-    { title: 'How to politely push back on Reviewer #2?', answers: 45 },
+    { id: 4,  title: 'How do you survive your first year without a support system?', answers: 89 },
+    { id: 9,  title: 'Best LaTeX setup for a 300-page dissertation?', answers: 67 },
+    { id: 8,  title: 'Academia vs industry after PhD — honest takes?', answers: 134 },
+    { id: 2,  title: 'Is it normal to feel like you know nothing in Year 3?', answers: 201 },
+    { id: 6,  title: 'How to politely push back on Reviewer #2?', answers: 45 },
   ];
 
   // Modal form state
