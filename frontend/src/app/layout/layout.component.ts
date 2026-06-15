@@ -1,8 +1,9 @@
-import { Component, signal, HostListener } from '@angular/core';
+import { Component, computed, signal, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { QuestionModalService } from '../services/question-modal.service';
+import { AuthService } from '../services/auth.service';
 
 interface TopicOption { id: string; label: string; }
 
@@ -73,7 +74,33 @@ export class LayoutComponent {
     { id: 'phd-life',  label: 'Job Market' },
   ];
 
-  constructor(public modal: QuestionModalService) {}
+  constructor(public modal: QuestionModalService, public auth: AuthService) {}
+
+  userInitials = computed(() => {
+    const name = this.auth.currentUser()?.full_name ?? '';
+    return name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(part => part[0]!.toUpperCase())
+      .join('');
+  });
+
+  userSubtitle = computed(() => {
+    const user = this.auth.currentUser();
+    if (!user) return '';
+    const stageLabels: Record<string, string> = {
+      'year-1': 'Year 1', 'year-2': 'Year 2', 'year-3': 'Year 3',
+      'year-4': 'Year 4', 'year-5': 'Year 5', 'year-6': 'Year 6+',
+      postdoc: 'Postdoc', faculty: 'Faculty',
+    };
+    const stage = user.stage ? (stageLabels[user.stage] ?? user.stage) : null;
+    return [stage, user.field].filter(Boolean).join(' · ');
+  });
+
+  logout() {
+    this.auth.logout();
+  }
 
   get canSubmit(): boolean {
     return this.questionTitle.trim().length > 0 && this.selectedTopic !== null;

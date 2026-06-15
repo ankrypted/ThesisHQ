@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
 import app.models  # noqa: F401 — ensure all models are registered before create_all
+from app.routers import auth
 
 app = FastAPI(title="ThesisHQ API", version="0.1.0")
 
@@ -18,6 +19,9 @@ app.add_middleware(
 @app.on_event("startup")
 def create_tables():
     Base.metadata.create_all(bind=engine)
+
+
+app.include_router(auth.router)
 
 
 @app.get("/")
