@@ -5,7 +5,7 @@ ThesisHQ is a Quora-style Q&A platform for PhD/thesis students.
 ## Functional Requirements (FRs)
 
 **User & Auth**
-- FR1: Users can register and log in (User model exists; login flow not yet implemented)
+- FR1: Users can register and log in ✅ (JWT auth, register/login/me endpoints, Login/Register pages)
 - FR2: Users can post questions/answers anonymously (toggle exists in composer)
 
 **Questions**
@@ -39,7 +39,8 @@ ThesisHQ is a Quora-style Q&A platform for PhD/thesis students.
 - NFR6 — **Data Persistence**: SQLite for development; schema should be portable to Postgres for production without major rework
 - NFR7 — **Scalability** (thesis-scope): Designed to support a single small academic community (hundreds of users), not internet-scale traffic
 
-## Status vs. Scope (gaps as of 2026-06-10)
+## Status vs. Scope (gaps as of 2026-06-15)
 
-- Auth/login (FR1) and voting endpoints (FR12) are modeled but not implemented
-- No real API routes connecting frontend to backend yet — frontend still runs on mock data
+- FR1 (auth/login) is now implemented
+- Voting endpoints (FR12) are modeled but not implemented
+- No real API routes for questions/answers/topics/tags yet — frontend still runs on mock data for everything except auth
