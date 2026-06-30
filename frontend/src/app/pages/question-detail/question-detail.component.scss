@@ -188,6 +188,12 @@
 
     .material-symbols-rounded { font-size: 16px; }
   }
+
+  &.voted {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
 }
 
 .save-btn {

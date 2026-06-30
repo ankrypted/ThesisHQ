@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { MOCK_QUESTIONS, MOCK_ANSWERS, Question, Answer } from '../../data/mock-data';
 import { SavedService } from '../../services/saved.service';
+import { VoteService } from '../../services/vote.service';
 
 @Component({
   selector: 'app-question-detail',
@@ -18,10 +19,13 @@ export class QuestionDetailComponent implements OnInit {
   answerText = '';
   postAnonymously = false;
 
-  constructor(private route: ActivatedRoute, public saved: SavedService) {}
+  constructor(private route: ActivatedRoute, public saved: SavedService, public vote: VoteService) {}
 
   get isSaved(): boolean { return !!this.question && this.saved.savedIds().has(this.question.id); }
   toggleSave(): void { if (this.question) this.saved.toggle(this.question.id); }
+
+  toggleQuestionVote(): void { if (this.question) this.vote.toggleQuestionVote(this.question.id); }
+  toggleAnswerVote(answerId: number): void { this.vote.toggleAnswerVote(answerId); }
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -35,7 +39,9 @@ export class QuestionDetailComponent implements OnInit {
 
   get sortedAnswers(): Answer[] {
     return [...this.answers].sort((a, b) =>
-      this.activeSort() === 'top' ? b.upvotes - a.upvotes : 0
+      this.activeSort() === 'top'
+        ? this.vote.answerCount(b.id, b.upvotes) - this.vote.answerCount(a.id, a.upvotes)
+        : 0
     );
   }
 }

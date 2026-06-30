@@ -231,6 +231,27 @@
   .material-symbols-rounded { font-size: 16px; }
 }
 
+.upvote-stat-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: color 0.15s;
+
+  .material-symbols-rounded { font-size: 16px; }
+
+  &:hover { color: var(--accent-light); }
+
+  &.voted { color: var(--accent-light); font-weight: 600; }
+}
+
 .save-btn {
   display: flex;
   align-items: center;

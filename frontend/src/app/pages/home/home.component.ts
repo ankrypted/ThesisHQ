@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { MOCK_QUESTIONS, Question } from '../../data/mock-data';
 import { SavedService } from '../../services/saved.service';
 import { QuestionModalService } from '../../services/question-modal.service';
+import { VoteService } from '../../services/vote.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   activeTab = signal<'latest' | 'trending' | 'unanswered'>('latest');
   questions: Question[] = MOCK_QUESTIONS;
 
-  constructor(public saved: SavedService, public modal: QuestionModalService) {}
+  constructor(public saved: SavedService, public modal: QuestionModalService, public vote: VoteService) {}
 
   setTab(tab: 'latest' | 'trending' | 'unanswered') { this.activeTab.set(tab); }
 
@@ -27,5 +28,10 @@ export class HomeComponent {
   toggleSave(id: number, event: Event): void {
     event.stopPropagation();
     this.saved.toggle(id);
+  }
+
+  toggleUpvote(id: number, event: Event): void {
+    event.stopPropagation();
+    this.vote.toggleQuestionVote(id);
   }
 }

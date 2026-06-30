@@ -51,9 +51,13 @@
             <span class="stat">
               <span class="material-symbols-rounded">forum</span>{{ q.answers }}
             </span>
-            <span class="stat">
-              <span class="material-symbols-rounded">arrow_upward</span>{{ q.upvotes }}
-            </span>
+            <button
+              class="upvote-stat-btn"
+              [class.voted]="vote.isQuestionVoted(q.id)"
+              (click)="toggleUpvote(q.id, $event)"
+              [title]="vote.isQuestionVoted(q.id) ? 'Remove upvote' : 'Upvote'">
+              <span class="material-symbols-rounded">arrow_upward</span>{{ vote.questionCount(q.id, q.upvotes) }}
+            </button>
             <button
               class="save-btn"
               [class.saved]="isSaved(q.id)"

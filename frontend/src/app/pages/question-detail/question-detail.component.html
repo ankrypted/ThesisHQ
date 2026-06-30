@@ -46,9 +46,9 @@
       </div>
 
       <div class="question-actions">
-        <button class="upvote-btn">
+        <button class="upvote-btn" [class.voted]="vote.isQuestionVoted(question.id)" (click)="toggleQuestionVote()">
           <span class="material-symbols-rounded">arrow_upward</span>
-          {{ question.upvotes }}
+          {{ vote.questionCount(question.id, question.upvotes) }}
         </button>
         <button class="save-btn" [class.saved]="isSaved" (click)="toggleSave()" [title]="isSaved ? 'Remove from saved' : 'Save question'">
           <span class="material-symbols-rounded">bookmark</span>
@@ -90,9 +90,9 @@
             </div>
           </div>
 
-          <button class="upvote-btn small">
+          <button class="upvote-btn small" [class.voted]="vote.isAnswerVoted(answer.id)" (click)="toggleAnswerVote(answer.id)">
             <span class="material-symbols-rounded">arrow_upward</span>
-            {{ answer.upvotes }}
+            {{ vote.answerCount(answer.id, answer.upvotes) }}
           </button>
         </div>
 
