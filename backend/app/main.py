@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base, SessionLocal
 import app.models  # noqa: F401 — ensure all models are registered before create_all
-from app.routers import auth, votes
+from app.routers import auth, questions, votes
 from app.seed import seed_if_empty
 
 app = FastAPI(title="ThesisHQ API", version="0.1.0")
@@ -28,6 +28,7 @@ def create_tables():
 
 
 app.include_router(auth.router)
+app.include_router(questions.router)
 app.include_router(votes.router)
 
 
